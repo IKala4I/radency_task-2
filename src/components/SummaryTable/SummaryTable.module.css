@@ -1,0 +1,22 @@
+.table {
+    display: grid;
+    row-gap: 0.7em;
+    font-family: sans-serif;
+    margin-top: 5em;
+    margin-bottom: 2em;
+}
+
+.tableHeader {
+    background-color: #646464;
+    border-radius: 5px;
+    color: white;
+    display: grid;
+    grid-template-columns: 5% 40% 20% 30%;
+    align-items: center;
+    padding: 7px;
+    font-size: 1.2em;
+}
+
+img {
+    width: 2em;
+}

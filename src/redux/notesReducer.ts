@@ -3,7 +3,7 @@ import {InferActionsTypes} from './store'
 
 const CREATE_NOTE = 'NOTES/CREATE_NOTE'
 
-type NoteType = {
+export type NoteType = {
     id: number,
     name: string,
     created: string,
@@ -77,7 +77,7 @@ const initialState = {
 type InitialStateType = typeof initialState
 type ActionsType = InferActionsTypes<typeof actions>
 
-const notesReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
+const notesReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case CREATE_NOTE:
             return {
@@ -90,6 +90,8 @@ const notesReducer = (state: InitialStateType = initialState, action: ActionsTyp
                         archived: false
                     }]
             }
+        default:
+            return state
     }
 }
 

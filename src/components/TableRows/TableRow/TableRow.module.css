@@ -1,0 +1,42 @@
+.tableNotes {
+    margin-top: 1em;
+}
+
+.tableRow {
+    display: grid;
+    grid-template-columns: 5% 15% 15% 10% 30% 15% 10%;
+    align-items: center;
+    padding: 7px;
+    font-size: 1.2em;
+    background-color: lightcyan;
+}
+
+.noteContent {
+    padding: 0 0.5em;
+}
+
+.tools {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.toolImg {
+    width: 1.5em;
+    cursor: pointer;
+}
+
+.tools span:not(:last-child) {
+    padding-right: 10px;
+}
+
+.tableIcon {
+    display: flex;
+}
+
+.iconImg {
+    width: 2em;
+}
+
+.info:not(:nth-of-type(1)){
+    color: darkgray;
+}

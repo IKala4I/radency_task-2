@@ -1,0 +1,20 @@
+.tableRow {
+    display: grid;
+    grid-template-columns: 5% 40% 20% 30%;
+    align-items: center;
+    padding: 7px;
+    font-size: 1.2em;
+    background-color: lightcyan;
+}
+
+.iconBlock {
+    display: flex;
+}
+
+img {
+    width: 2em;
+}
+
+span:not(:nth-of-type(1)) {
+    color: darkgray;
+}
