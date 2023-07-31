@@ -1,9 +1,9 @@
-import {NoteType} from '../../redux/notesReducer'
 import {noteCategories} from '../../enums/noteCategories'
 import SummaryTableRow from './SummaryTableRow/SummaryTableRow'
 import styles from './SummaryTable.module.css'
+import {ObjWIthNotesArray} from '../../Types/types'
 
-const SummaryTable = ({notes}: { notes: Array<NoteType> }) => {
+const SummaryTable = ({notes}: ObjWIthNotesArray) => {
     const summaryTableRows: any = []
 
     Object.values(noteCategories).forEach(category => {

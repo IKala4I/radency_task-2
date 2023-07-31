@@ -12,11 +12,13 @@ const TableHeader = () => {
             <h4>Content</h4>
             <h4>Dates</h4>
             <div className={styles.tools}>
-                <span>
-                    <img src={archiveTool} alt="archive"/>
+                 <span className={styles.toolImg}>
                 </span>
                 <span>
-                    <img src={trashTool} alt="bin"/>
+                    <img className={styles.toolImg} src={archiveTool} alt="archive"/>
+                </span>
+                <span>
+                    <img className={styles.toolImg} src={trashTool} alt="bin"/>
                 </span>
             </div>
         </div>

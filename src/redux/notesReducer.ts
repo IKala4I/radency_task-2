@@ -1,7 +1,11 @@
 import {noteCategories} from '../enums/noteCategories'
 import {InferActionsTypes} from './store'
+import {NotesArray} from '../Types/types'
 
-const CREATE_NOTE = 'NOTES/CREATE_NOTE'
+const CREATE_NOTE = 'notes/CREATE_NOTE'
+const ARCHIVE_NOTE = 'notes/ARCHIVE_NOTE'
+const UNARCHIVE_NOTE = 'notes/UNARCHIVE_NOTE'
+const REMOVE_NOTE = 'notes/REMOVE_NOTE'
 
 export type NoteType = {
     id: number,
@@ -71,7 +75,7 @@ const initialState = {
             content: 'It is the life of perfection which seems to be incomplete, and of fullness which seems to be empty.',
             archived: false
         }
-    ] as Array<NoteType>
+    ] as NotesArray
 }
 
 type InitialStateType = typeof initialState
@@ -90,13 +94,45 @@ const notesReducer = (state = initialState, action: ActionsType): InitialStateTy
                         archived: false
                     }]
             }
+        case ARCHIVE_NOTE:
+            return {
+                ...state,
+                notes: state.notes.map(note => {
+                    if (note.id === action.noteId)
+                        return {
+                            ...note,
+                            archived: true
+                        }
+                    return note
+                })
+            }
+        case UNARCHIVE_NOTE:
+            return {
+                ...state,
+                notes: state.notes.map(note => {
+                    if (note.id === action.noteId)
+                        return {
+                            ...note,
+                            archived: false
+                        }
+                    return note
+                })
+            }
+        case REMOVE_NOTE:
+            return {
+                ...state,
+                notes: state.notes.filter(note => note.id !== action.noteId)
+            }
         default:
             return state
     }
 }
 
 export const actions = {
-    createNote: (note: NoteType) => ({type: CREATE_NOTE, note} as const)
+    createNote: (note: NoteType) => ({type: CREATE_NOTE, note} as const),
+    archiveNote: (noteId: number) => ({type: ARCHIVE_NOTE, noteId} as const),
+    unarchiveNote: (noteId: number) => ({type: UNARCHIVE_NOTE, noteId} as const),
+    removeNote: (noteId: number) => ({type: REMOVE_NOTE, noteId} as const)
 }
 
 export default notesReducer

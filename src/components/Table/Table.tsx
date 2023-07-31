@@ -1,9 +1,9 @@
 import TableHeader from '../TableHeader/TableHeader'
 import TableRows from '../TableRows/TableRows'
-import {NoteType} from '../../redux/notesReducer'
 import styles from './Table.module.css'
+import {ObjWIthNotesArray} from '../../Types/types'
 
-const Table = ({notes}: { notes: Array<NoteType> }) => {
+const Table = ({notes}: ObjWIthNotesArray) => {
     return (
         <div className={styles.table}>
             <TableHeader/>

@@ -18,7 +18,11 @@ const icons = new Map([
     [noteCategories.Quote, quoteIcon]
 ])
 
-const TableRow = (note: NoteType) => {
+const TableRow = ({note, archiveUnarchiveCB, removeNoteCB}: {
+    note: NoteType,
+    archiveUnarchiveCB: any,
+    removeNoteCB: any
+}) => {
     return (
         <div className={styles.tableRow}>
             <div className={styles.tableIcon}>
@@ -32,22 +36,23 @@ const TableRow = (note: NoteType) => {
             <div className={styles.tools}>
                 {!note.archived ?
                     <span>
-                        <button>
+                        <button className={styles.toolButton}>
                             <img className={styles.toolImg} src={pencil} alt="edit"/>
                         </button>
                     </span>
                     :
-                    ''
+                    <div className={styles.toolButton}>
+                    </div>
                 }
                 <span>
-                    <button>
+                    <button className={styles.toolButton} onClick={() => archiveUnarchiveCB(note.id)}>
                         <img className={styles.toolImg}
                              src={note.archived ? unarchiveTool : archiveTool}
                              alt={note.archived ? 'unarchive' : 'archive'}/>
                         </button>
                 </span>
                 <span>
-                    <button>
+                    <button className={styles.toolButton} onClick={() => removeNoteCB(note.id)}>
                         <img className={styles.toolImg} src={trashBin} alt="trash"/>
                     </button>
                 </span>

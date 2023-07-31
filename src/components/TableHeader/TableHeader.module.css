@@ -9,11 +9,11 @@
     font-size: 1.2em;
 }
 
-img {
-    width: 2em;
+.toolImg {
+    width: 1.5em;
 }
 
 .tools {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
