@@ -1,10 +1,10 @@
-import styles from './TableHeader.module.css'
-import archiveTool from '../../assets/images/tools/archive-tool-white.svg'
-import trashTool from '../../assets/images/tools/trash-tool-white.svg'
+import styles from '../Headers.module.css'
+import archiveTool from '../../../../assets/images/tools/archive-tool-white.svg'
+import trashTool from '../../../../assets/images/tools/trash-tool-white.svg'
 
-const TableHeader = () => {
+const TableNoteHeader = () => {
     return (
-        <div className={styles.tableHeader}>
+        <div className={`${styles.tableHeader} ${styles.tableNoteHeader}`}>
             <div></div>
             <h4>Name</h4>
             <h4>Created</h4>
@@ -25,4 +25,4 @@ const TableHeader = () => {
     )
 }
 
-export default TableHeader
+export default TableNoteHeader

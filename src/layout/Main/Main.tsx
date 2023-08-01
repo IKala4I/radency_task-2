@@ -5,12 +5,13 @@ import plusLogo from '../../assets/images/plus-logo.svg'
 import Table from '../../components/Table/Table'
 import {getNotes} from '../../redux/selectors'
 import {useDispatch, useSelector} from 'react-redux'
-import SummaryTable from '../../components/SummaryTable/SummaryTable'
 import {FC, useState} from 'react'
 import CreateNoteForm from '../../components/CreateNoteForm/CreateNoteForm'
 import {NotesArray} from '../../Types/types'
 import {Dispatch} from 'redux'
 import {actions} from '../../redux/notesReducer'
+import styles from './Main.module.css'
+import {tableTypes} from '../../enums/tableTypes'
 
 const Main: FC = () => {
 
@@ -20,12 +21,25 @@ const Main: FC = () => {
     const archivedNotes = notes.filter(note => note.archived)
     const activeNotes = notes.filter(note => !note.archived)
 
-    const [createMode, toogleCreateMode] = useState(false)
+    const [isCreateMode, changeIsCreateMode] = useState(false)
+    const [isEditMode, changeIsEditMode] = useState(false)
+    const [noteIdForUpdate, setNoteIdForUpdate]: any = useState(null)
+    const [editFormTitle, setEditFormTitle]: any = useState(null)
+
     const [isShowedArchivedNotes, setIsShowedArchivedNotes] = useState(false)
     const [showArchivedNotesButtonText, setShowArchivedNotesButtonText] = useState('Show archived notes')
 
-    const changeCreateMode = () => {
-        toogleCreateMode(!createMode)
+    const toggleCreateMode = () => {
+        changeIsCreateMode(!isCreateMode)
+    }
+    const toggleEditMode = (noteId: number | null = null) => {
+        if (noteId !== noteIdForUpdate && Number.isFinite(noteId)) {
+            setNoteIdForUpdate(noteId)
+            setEditFormTitle(notes[noteId as number].name)
+        }
+        if (noteIdForUpdate === null || noteId === null) {
+            changeIsEditMode(!isEditMode)
+        }
     }
 
     const showArchivedNotes = () => {
@@ -35,7 +49,6 @@ const Main: FC = () => {
     }
 
     const onCreateNote = (formData: any) => {
-        debugger
         const note = {
             ...formData,
             id: notes.length,
@@ -44,7 +57,16 @@ const Main: FC = () => {
             created: createTodayDate()
         }
         dispatch(actions.createNote(note))
-        toogleCreateMode(!createMode)
+        changeIsCreateMode(!isCreateMode)
+    }
+    const onUpdateNote = (formData: any) => {
+        const note = {
+            ...formData,
+            id: noteIdForUpdate,
+            dates: formData.content ? getDatesFromContent(formData.content) : getDatesFromContent(notes[noteIdForUpdate].content),
+        }
+        dispatch(actions.updateNote(noteIdForUpdate, note))
+        changeIsEditMode(!isEditMode)
     }
 
     const getDatesFromContent = (content: string) => {
@@ -73,17 +95,23 @@ const Main: FC = () => {
                 <ActionButton imgSrc={archiveLogo} buttonText={showArchivedNotesButtonText}
                               onClickCB={showArchivedNotes}/>
                 <section>
-                    <Table notes={activeNotes}/>
-                    {createMode ?
-                        <CreateNoteForm onCloseForm={changeCreateMode} onSubmit={onCreateNote}/> :
-                        <ActionButton imgSrc={plusLogo} buttonText='Create note' onClickCB={changeCreateMode}/>
+                    <Table notes={activeNotes} showEditForm={toggleEditMode} tableType={tableTypes.Notes}/>
+                    {isCreateMode ?
+                        <CreateNoteForm onCloseForm={toggleCreateMode} onSubmit={onCreateNote}/> :
+                        isEditMode ?
+                            <div>
+                                <h3 className={styles.editFormTitle}>Do you wanna
+                                    change {editFormTitle} ?</h3>
+                                <CreateNoteForm onCloseForm={toggleEditMode} onSubmit={onUpdateNote}/>
+                            </div> :
+                            <ActionButton imgSrc={plusLogo} buttonText='Create note' onClickCB={toggleCreateMode}/>
                     }
                 </section>
                 <section>
-                    {isShowedArchivedNotes ? <Table notes={archivedNotes}/> : ''}
+                    {isShowedArchivedNotes ? <Table notes={archivedNotes} tableType={tableTypes.Notes}/> : ''}
                 </section>
                 <section>
-                    <SummaryTable notes={notes}/>
+                    <Table notes={notes} tableType={tableTypes.Summary}/>
                 </section>
             </div>
         </main>

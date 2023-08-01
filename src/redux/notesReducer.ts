@@ -6,6 +6,7 @@ const CREATE_NOTE = 'notes/CREATE_NOTE'
 const ARCHIVE_NOTE = 'notes/ARCHIVE_NOTE'
 const UNARCHIVE_NOTE = 'notes/UNARCHIVE_NOTE'
 const REMOVE_NOTE = 'notes/REMOVE_NOTE'
+const UPDATE_NOTE = 'notes/UPDATE_NOTE'
 
 export type NoteType = {
     id: number,
@@ -131,6 +132,18 @@ const notesReducer = (state = initialState, action: ActionsType): InitialStateTy
                 ...state,
                 notes: state.notes.filter(note => note.id !== action.noteId)
             }
+        case UPDATE_NOTE:
+            return {
+                ...state,
+                notes: state.notes.map(note => {
+                    if (note.id === action.payload.noteId)
+                        return {
+                            ...note,
+                            ...action.payload.data
+                        }
+                    return note
+                })
+            }
         default:
             return state
     }
@@ -140,7 +153,8 @@ export const actions = {
     createNote: (note: NoteType) => ({type: CREATE_NOTE, note} as const),
     archiveNote: (noteId: number) => ({type: ARCHIVE_NOTE, noteId} as const),
     unarchiveNote: (noteId: number) => ({type: UNARCHIVE_NOTE, noteId} as const),
-    removeNote: (noteId: number) => ({type: REMOVE_NOTE, noteId} as const)
+    removeNote: (noteId: number) => ({type: REMOVE_NOTE, noteId} as const),
+    updateNote: (noteId: number, data: any) => ({type: UPDATE_NOTE, payload: {noteId, data}} as const),
 }
 
 export default notesReducer

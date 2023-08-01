@@ -10,7 +10,7 @@ const CreateNoteForm: FC<InjectedFormProps<CreateNoteFormValuesType, CreateNoteF
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.fieldBlock}>
-                <Field className={styles.field} name='name' component='input' placeholder='name'/>
+                <Field className={styles.field} name='name' component='input' placeholder='Name'/>
             </div>
             <div className={styles.fieldBlock}>
                 <Field
@@ -25,7 +25,8 @@ const CreateNoteForm: FC<InjectedFormProps<CreateNoteFormValuesType, CreateNoteF
                 </Field>
             </div>
             <div className={styles.fieldBlock}>
-                <Field className={`${styles.field} ${styles.content}`} name="content" component='textarea'></Field>
+                <Field className={`${styles.field} ${styles.content}`} name="content" component='textarea'
+                       placeholder='Content'></Field>
             </div>
             <div className={styles.buttons}>
                 <button className={styles.actionButton} type="submit">Save</button>

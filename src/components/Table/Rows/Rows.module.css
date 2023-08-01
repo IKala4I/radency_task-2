@@ -1,14 +1,17 @@
-.tableNotes {
-    margin-top: 1em;
-}
-
 .tableRow {
     display: grid;
-    grid-template-columns: 5% 15% 15% 10% 30% 15% 10%;
     align-items: center;
     padding: 7px;
     font-size: 1.2em;
     background-color: lightcyan;
+}
+
+.tableNoteRow {
+    grid-template-columns: 5% 15% 15% 10% 30% 15% 10%;
+}
+
+.summaryTableRow {
+    grid-template-columns: 5% 40% 20% 30%;
 }
 
 .noteContent {
@@ -32,7 +35,7 @@
     cursor: pointer;
 }
 
-.tableIcon {
+.iconBlock {
     display: flex;
 }
 
