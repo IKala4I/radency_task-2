@@ -13,6 +13,7 @@ export type NoteType = {
     created: string,
     category: noteCategories,
     content: string,
+    dates: null | string,
     archived: boolean
 }
 
@@ -25,6 +26,7 @@ const initialState = {
             created: 'April 20, 2021',
             category: noteCategories.Task,
             content: 'I\'m gonna have a dentist appointment on the 22/4/2021, I moved it from 24/4/2021',
+            dates: '22/4/2021, 24/4/2021',
             archived: false
         },
         {
@@ -33,6 +35,7 @@ const initialState = {
             created: 'April 27, 2021',
             category: noteCategories.Random_Thought,
             content: 'The evolution...',
+            dates: null,
             archived: true
         },
         {
@@ -41,6 +44,7 @@ const initialState = {
             created: 'May 05, 2021',
             category: noteCategories.Idea,
             content: 'Implement new feature till 10/6/2021 ',
+            dates: '10/6/2021',
             archived: false
         },
         {
@@ -49,6 +53,7 @@ const initialState = {
             created: 'May 07, 2021',
             category: noteCategories.Quote,
             content: 'Power doesn\'t co...',
+            dates: null,
             archived: false
         },
         {
@@ -57,6 +62,7 @@ const initialState = {
             created: 'July 27, 2023',
             category: noteCategories.Task,
             content: 'Create notes until 30/7/2023',
+            dates: null,
             archived: true
         },
         {
@@ -65,6 +71,7 @@ const initialState = {
             created: 'July 29, 2023',
             category: noteCategories.Random_Thought,
             content: 'I shouldn\'t forget about English',
+            dates: null,
             archived: false
         },
         {
@@ -73,6 +80,7 @@ const initialState = {
             created: 'July 20, 2023',
             category: noteCategories.Quote,
             content: 'It is the life of perfection which seems to be incomplete, and of fullness which seems to be empty.',
+            dates: null,
             archived: false
         }
     ] as NotesArray

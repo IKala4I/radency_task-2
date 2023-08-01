@@ -23,6 +23,7 @@ const TableRow = ({note, archiveUnarchiveCB, removeNoteCB}: {
     archiveUnarchiveCB: any,
     removeNoteCB: any
 }) => {
+    debugger
     return (
         <div className={styles.tableRow}>
             <div className={styles.tableIcon}>
@@ -32,7 +33,7 @@ const TableRow = ({note, archiveUnarchiveCB, removeNoteCB}: {
             <span className={styles.info}>{note.created}</span>
             <span className={styles.info}>{note.category}</span>
             <span className={`${styles.noteContent} ${styles.info}`}>{note.content}</span>
-            <span className={styles.info}>dates</span>
+            <span className={styles.info}>{note.dates}</span>
             <div className={styles.tools}>
                 {!note.archived ?
                     <span>
