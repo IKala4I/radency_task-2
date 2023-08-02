@@ -1,7 +1,6 @@
 import TableNoteHeader from './Headers/TableNoteHeader/TableNoteHeader'
 import TableNoteRows from './Rows/TableNoteRows/TableNoteRows'
 import styles from './Table.module.css'
-import {ObjWIthNotesArray} from '../../Types/types'
 import {tableTypes} from '../../enums/tableTypes'
 import SummaryTableHeader from './Headers/SummaryTableHeader/SummaryTableHeader'
 import SummaryTableRows from './Rows/SummaryTableRows/SummaryTableRows'
