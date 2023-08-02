@@ -1,12 +1,14 @@
 import {noteCategories} from '../enums/noteCategories'
 import {InferActionsTypes} from './store'
 import {NotesArray} from '../Types/types'
+import {debug} from 'util'
 
 const CREATE_NOTE = 'notes/CREATE_NOTE'
 const ARCHIVE_NOTE = 'notes/ARCHIVE_NOTE'
 const UNARCHIVE_NOTE = 'notes/UNARCHIVE_NOTE'
 const REMOVE_NOTE = 'notes/REMOVE_NOTE'
 const UPDATE_NOTE = 'notes/UPDATE_NOTE'
+const CHANGE_NOTE_ID_FOR_UPDATE = 'notes/CHANGE_NOTE_ID_FOR_UPDATE'
 
 export type NoteType = {
     id: number,
@@ -84,7 +86,8 @@ const initialState = {
             dates: null,
             archived: false
         }
-    ] as NotesArray
+    ] as NotesArray,
+    noteIdForUpdate: null as (number | null)
 }
 
 type InitialStateType = typeof initialState
@@ -106,26 +109,12 @@ const notesReducer = (state = initialState, action: ActionsType): InitialStateTy
         case ARCHIVE_NOTE:
             return {
                 ...state,
-                notes: state.notes.map(note => {
-                    if (note.id === action.noteId)
-                        return {
-                            ...note,
-                            archived: true
-                        }
-                    return note
-                })
+                notes: updateObjectInArray(state.notes, action.noteId, 'id', {archived: true})
             }
         case UNARCHIVE_NOTE:
             return {
                 ...state,
-                notes: state.notes.map(note => {
-                    if (note.id === action.noteId)
-                        return {
-                            ...note,
-                            archived: false
-                        }
-                    return note
-                })
+                notes: updateObjectInArray(state.notes, action.noteId, 'id', {archived: false})
             }
         case REMOVE_NOTE:
             return {
@@ -144,17 +133,34 @@ const notesReducer = (state = initialState, action: ActionsType): InitialStateTy
                     return note
                 })
             }
+        case CHANGE_NOTE_ID_FOR_UPDATE:
+            debugger
+            return {
+                ...state,
+                noteIdForUpdate: action.noteId
+            }
         default:
             return state
     }
 }
 
+const updateObjectInArray = (items: any, itemId: any, objKey: any, newObjProps: any) => {
+    return items.map((item: any) => {
+        if (item[objKey] === itemId)
+            return {
+                ...item,
+                ...newObjProps
+            }
+        return item
+    })
+}
 export const actions = {
     createNote: (note: NoteType) => ({type: CREATE_NOTE, note} as const),
     archiveNote: (noteId: number) => ({type: ARCHIVE_NOTE, noteId} as const),
     unarchiveNote: (noteId: number) => ({type: UNARCHIVE_NOTE, noteId} as const),
     removeNote: (noteId: number) => ({type: REMOVE_NOTE, noteId} as const),
     updateNote: (noteId: number, data: any) => ({type: UPDATE_NOTE, payload: {noteId, data}} as const),
+    changeNoteIdForUpdate: (noteId: (number | null)) => ({type: CHANGE_NOTE_ID_FOR_UPDATE, noteId} as const)
 }
 
 export default notesReducer

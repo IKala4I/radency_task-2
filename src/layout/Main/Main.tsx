@@ -1,7 +1,7 @@
 import '../commonStyles.css'
 import ActionButton from '../../components/ActionButton/ActionButton'
 import Table from '../../components/Table/Table'
-import {getNotes} from '../../redux/selectors'
+import {getNoteIdForUpdate, getNotes} from '../../redux/selectors'
 import {useDispatch, useSelector} from 'react-redux'
 import {FC, useState} from 'react'
 import CreateNoteForm from '../../components/CreateNoteForm/CreateNoteForm'
@@ -15,6 +15,7 @@ import {logos} from '../../imageHelpers'
 const Main: FC = () => {
 
     const notes: NotesArray = useSelector(getNotes)
+    const noteIdForUpdate = useSelector(getNoteIdForUpdate)
     const dispatch: Dispatch = useDispatch()
 
     const archivedNotes = notes.filter(note => note.archived)
@@ -22,7 +23,7 @@ const Main: FC = () => {
 
     const [isCreateMode, changeIsCreateMode] = useState(false)
     const [isEditMode, changeIsEditMode] = useState(false)
-    const [noteIdForUpdate, setNoteIdForUpdate]: any = useState(null)
+
     const [editFormTitle, setEditFormTitle]: any = useState(null)
 
     const [isShowedArchivedNotes, setIsShowedArchivedNotes] = useState(false)
@@ -33,7 +34,7 @@ const Main: FC = () => {
     }
     const toggleEditMode = (noteId: number | null = null) => {
         if (noteId !== noteIdForUpdate && Number.isFinite(noteId)) {
-            setNoteIdForUpdate(noteId)
+            dispatch(actions.changeNoteIdForUpdate(noteId as number))
             setEditFormTitle(notes[noteId as number].name)
         }
         if (noteIdForUpdate === null || noteId === null) {
@@ -62,9 +63,10 @@ const Main: FC = () => {
         const note = {
             ...formData,
             id: noteIdForUpdate,
-            dates: formData.content ? getDatesFromContent(formData.content) : getDatesFromContent(notes[noteIdForUpdate].content),
+            dates: formData.content ? getDatesFromContent(formData.content) : getDatesFromContent(notes[noteIdForUpdate as number].content)
         }
-        dispatch(actions.updateNote(noteIdForUpdate, note))
+        dispatch(actions.updateNote(noteIdForUpdate as number, note))
+        dispatch(actions.changeNoteIdForUpdate(null))
         changeIsEditMode(!isEditMode)
     }
 
