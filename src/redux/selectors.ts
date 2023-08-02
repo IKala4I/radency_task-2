@@ -16,10 +16,6 @@ export const getNameNoteForUpdate = (noteId: number) => (state: AppStateType) =>
     const notes = getNotes(state)
     return notes[noteId].name
 }
-export const getCategoryNoteForUpdate = (noteId: number) => (state: AppStateType) => {
-    const notes = getNotes(state)
-    return notes[noteId].category
-}
 export const getContentNoteForUpdate = (noteId: number) => (state: AppStateType) => {
     const notes = getNotes(state)
     return notes[noteId].content

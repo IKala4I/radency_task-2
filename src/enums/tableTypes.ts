@@ -1,4 +1,5 @@
 export enum tableTypes {
-    Notes,
+    ActiveNotes,
+    ArchivedNotes,
     Summary
 }

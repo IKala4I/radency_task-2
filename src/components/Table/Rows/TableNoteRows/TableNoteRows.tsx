@@ -1,16 +1,12 @@
 import TableNoteRow from './TableNoteRow/TableNoteRow'
 import {Dispatch} from 'redux'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {noteActions} from '../../../../redux/notesReducer'
 import {formModesActions} from '../../../../redux/formModesReducer'
-import {getIsCreateMode, getIsEditMode, getNoteIdForUpdate} from '../../../../redux/selectors'
 
-const TableNoteRows = ({notes}: any) => {
-
+const TableNoteRows = ({notes, ...props}: any) => {
     const dispatch: Dispatch = useDispatch()
-    const noteIdForUpdate = useSelector(getNoteIdForUpdate)
-    const isEditMode = useSelector(getIsEditMode)
-    const isCreateMode = useSelector(getIsCreateMode)
+    const {noteIdForUpdate, isEditMode, isCreateMode} = props
 
     const showEditForm = (noteId: number | null = null) => {
         if (noteId !== noteIdForUpdate && Number.isFinite(noteId)) {

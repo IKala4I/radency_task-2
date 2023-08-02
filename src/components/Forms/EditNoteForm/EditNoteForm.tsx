@@ -45,7 +45,7 @@ const EditNoteBlock = ({noteIdForUpdate}: any) => {
     const noteName = useSelector(getNameNoteForUpdate(noteIdForUpdate))
     const noteContent = useSelector(getContentNoteForUpdate(noteIdForUpdate))
 
-    const toggleEditMode = () => {
+    const disableEditMode = () => {
         dispatch(formModesActions.toggleEditMode())
     }
 
@@ -63,7 +63,7 @@ const EditNoteBlock = ({noteIdForUpdate}: any) => {
     return (
         <>
             <h3>Do you wanna change your note {noteName} ?</h3>
-            <EditNoteReduxForm onCloseForm={toggleEditMode} onSubmit={onUpdateNote}
+            <EditNoteReduxForm onCloseForm={disableEditMode} onSubmit={onUpdateNote}
                                noteData={{noteName, noteContent}}/>
         </>
     )

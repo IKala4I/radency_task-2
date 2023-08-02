@@ -141,7 +141,14 @@ const notesReducer = (state = initialState, action: ActionsType): InitialStateTy
             return state
     }
 }
-
+export const noteActions = {
+    createNote: (note: NoteType) => ({type: CREATE_NOTE, note} as const),
+    archiveNote: (noteId: number) => ({type: ARCHIVE_NOTE, noteId} as const),
+    unarchiveNote: (noteId: number) => ({type: UNARCHIVE_NOTE, noteId} as const),
+    removeNote: (noteId: number) => ({type: REMOVE_NOTE, noteId} as const),
+    updateNote: (noteId: number, data: any) => ({type: UPDATE_NOTE, payload: {noteId, data}} as const),
+    changeNoteIdForUpdate: (noteId: (number | null)) => ({type: CHANGE_NOTE_ID_FOR_UPDATE, noteId} as const)
+}
 const updateObjectInArray = (items: any, itemId: any, objKey: any, newObjProps: any) => {
     return items.map((item: any) => {
         if (item[objKey] === itemId)
@@ -152,13 +159,4 @@ const updateObjectInArray = (items: any, itemId: any, objKey: any, newObjProps: 
         return item
     })
 }
-export const noteActions = {
-    createNote: (note: NoteType) => ({type: CREATE_NOTE, note} as const),
-    archiveNote: (noteId: number) => ({type: ARCHIVE_NOTE, noteId} as const),
-    unarchiveNote: (noteId: number) => ({type: UNARCHIVE_NOTE, noteId} as const),
-    removeNote: (noteId: number) => ({type: REMOVE_NOTE, noteId} as const),
-    updateNote: (noteId: number, data: any) => ({type: UPDATE_NOTE, payload: {noteId, data}} as const),
-    changeNoteIdForUpdate: (noteId: (number | null)) => ({type: CHANGE_NOTE_ID_FOR_UPDATE, noteId} as const)
-}
-
 export default notesReducer
