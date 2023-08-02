@@ -1,8 +1,9 @@
-import styles from './Header.module.css'
-import '../commonStyles.css'
-import {logos} from '../../imageHelpers'
+import {FC} from 'react';
+import styles from './Header.module.css';
+import '../commonStyles.css';
+import {logos} from '../../imageHelpers';
 
-const Header = () => {
+const Header: FC = () => {
     return (
         <header className={styles.header}>
             <div className={`container ${styles.headerContainer}`}>
@@ -22,7 +23,7 @@ const Header = () => {
                 </div>
             </div>
         </header>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;
