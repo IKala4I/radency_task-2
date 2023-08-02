@@ -1,9 +1,11 @@
 import {combineReducers, createStore} from 'redux'
 import notesReducer from './notesReducer'
 import {reducer as formReducer} from 'redux-form'
+import {formModesReducer} from './formModesReducer'
 
 const rootReducer = combineReducers({
     notes: notesReducer,
+    formModes: formModesReducer,
     form: formReducer
 })
 

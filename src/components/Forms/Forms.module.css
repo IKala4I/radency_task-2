@@ -10,14 +10,6 @@
     margin-bottom: 0.5em;
 }
 
-.field{
-    width: 13em;
-}
-
-.content{
-    height: 4em;
-}
-
 .buttons {
     display: flex;
     justify-content: space-evenly;

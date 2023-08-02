@@ -1,7 +1,6 @@
 import {noteCategories} from '../enums/noteCategories'
 import {InferActionsTypes} from './store'
 import {NotesArray} from '../Types/types'
-import {debug} from 'util'
 
 const CREATE_NOTE = 'notes/CREATE_NOTE'
 const ARCHIVE_NOTE = 'notes/ARCHIVE_NOTE'
@@ -91,7 +90,7 @@ const initialState = {
 }
 
 type InitialStateType = typeof initialState
-type ActionsType = InferActionsTypes<typeof actions>
+type ActionsType = InferActionsTypes<typeof noteActions>
 
 const notesReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
@@ -134,7 +133,6 @@ const notesReducer = (state = initialState, action: ActionsType): InitialStateTy
                 })
             }
         case CHANGE_NOTE_ID_FOR_UPDATE:
-            debugger
             return {
                 ...state,
                 noteIdForUpdate: action.noteId
@@ -154,7 +152,7 @@ const updateObjectInArray = (items: any, itemId: any, objKey: any, newObjProps: 
         return item
     })
 }
-export const actions = {
+export const noteActions = {
     createNote: (note: NoteType) => ({type: CREATE_NOTE, note} as const),
     archiveNote: (noteId: number) => ({type: ARCHIVE_NOTE, noteId} as const),
     unarchiveNote: (noteId: number) => ({type: UNARCHIVE_NOTE, noteId} as const),

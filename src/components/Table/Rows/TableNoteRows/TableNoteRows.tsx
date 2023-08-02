@@ -1,21 +1,36 @@
 import TableNoteRow from './TableNoteRow/TableNoteRow'
-import {ObjWIthNotesArray} from '../../../../Types/types'
 import {Dispatch} from 'redux'
-import {useDispatch} from 'react-redux'
-import {actions} from '../../../../redux/notesReducer'
+import {useDispatch, useSelector} from 'react-redux'
+import {noteActions} from '../../../../redux/notesReducer'
+import {formModesActions} from '../../../../redux/formModesReducer'
+import {getIsCreateMode, getIsEditMode, getNoteIdForUpdate} from '../../../../redux/selectors'
 
-const TableNoteRows = ({notes, showEditForm}: any) => {
+const TableNoteRows = ({notes}: any) => {
 
     const dispatch: Dispatch = useDispatch()
+    const noteIdForUpdate = useSelector(getNoteIdForUpdate)
+    const isEditMode = useSelector(getIsEditMode)
+    const isCreateMode = useSelector(getIsCreateMode)
+
+    const showEditForm = (noteId: number | null = null) => {
+        if (noteId !== noteIdForUpdate && Number.isFinite(noteId)) {
+            dispatch(noteActions.changeNoteIdForUpdate(noteId as number))
+        }
+        if (!isEditMode) {
+            if (isCreateMode)
+                dispatch(formModesActions.toggleCreateMode())
+            dispatch(formModesActions.toggleEditMode())
+        }
+    }
 
     const archiveNote = (noteId: number) => {
-        dispatch(actions.archiveNote(noteId))
+        dispatch(noteActions.archiveNote(noteId))
     }
     const unarchiveNote = (noteId: number) => {
-        dispatch(actions.unarchiveNote(noteId))
+        dispatch(noteActions.unarchiveNote(noteId))
     }
     const removeNote = (noteId: number) => {
-        dispatch(actions.removeNote(noteId))
+        dispatch(noteActions.removeNote(noteId))
     }
 
     const tableRows = notes.map((note: any) =>

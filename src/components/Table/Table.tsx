@@ -6,13 +6,13 @@ import {tableTypes} from '../../enums/tableTypes'
 import SummaryTableHeader from './Headers/SummaryTableHeader/SummaryTableHeader'
 import SummaryTableRows from './Rows/SummaryTableRows/SummaryTableRows'
 
-const Table = ({notes, showEditForm, tableType}: any) => {
+const Table = ({notes, tableType}: any) => {
     switch (tableType) {
         case tableTypes.Notes:
             return (
                 <div className={styles.table}>
                     <TableNoteHeader/>
-                    <TableNoteRows notes={notes} showEditForm={showEditForm}/>
+                    <TableNoteRows notes={notes}/>
                 </div>
             )
         case tableTypes.Summary:
