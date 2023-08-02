@@ -1,6 +1,13 @@
 import styles from './ActionButton.module.css'
+import {FC} from 'react'
 
-const ActionButton = ({imgSrc, buttonText, onClickCB}: any) => {
+type ActionButtonProps = {
+    imgSrc: string;
+    buttonText: string;
+    onClickCB: () => void
+};
+
+const ActionButton: FC<ActionButtonProps> = ({imgSrc, buttonText, onClickCB}) => {
     return (
         <div className={styles.action}>
             <span>
