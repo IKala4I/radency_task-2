@@ -1,14 +1,15 @@
 import {Field, WrappedFieldProps} from "redux-form"
 import {WrappedFieldMetaProps} from 'redux-form/lib/Field'
-import {FC} from 'react'
+import {FC, ReactNode} from 'react'
 import styles from './FormControls.module.css'
 import {FieldValidatorType} from '../../utils/validators'
 
 type FormControlPropsType = {
-    meta: WrappedFieldMetaProps
+    meta: WrappedFieldMetaProps,
+    children: ReactNode
 }
 
-const FormControl: FC<FormControlPropsType> = ({meta: {touched, error}, children}: any) => {
+const FormControl: FC<FormControlPropsType> = ({meta: {touched, error}, children}) => {
     const hasError = touched && error
     return (
         <div className={(hasError ? styles.error : "")}>
@@ -31,14 +32,15 @@ export const Textarea: FC<WrappedFieldProps> = (props) => {
 }
 
 
-export const Select: FC<WrappedFieldProps> = (props) => {
+type SelectProps = WrappedFieldProps & { options?: { value: string, label: string }[] }
+export const Select: FC<SelectProps> = (props) => {
     const {input, meta, ...restProps} = props
-    const {options}: any = restProps
+    const {options} = restProps
 
     return (
         <FormControl {...props}>
-            <select className={styles.field} {...input}>
-                {options.map((option: any) => (
+            <select className={styles.field} {...input} {...restProps}>
+                {options?.map((option) => (
                     <option value={option.value}>
                         {option.label}
                     </option>
@@ -61,7 +63,9 @@ export const Input: FC<WrappedFieldProps> = (props) => {
 export function createField<FormKeysType extends string>(placeholder: string | undefined,
                                                          name: FormKeysType,
                                                          validators: Array<FieldValidatorType>,
-                                                         component: FC<WrappedFieldProps>,
+                                                         component: FC<WrappedFieldProps & {
+                                                             options?: { value: string, label: string }[]
+                                                         }>,
                                                          props = {}, text = "") {
 
     return <div>
