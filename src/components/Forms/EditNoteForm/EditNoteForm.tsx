@@ -54,7 +54,7 @@ const EditNoteBlock = ({noteIdForUpdate}: any) => {
             name: noteName,
             content: noteContent,
             ...formData,
-            dates: formData.content ? getDatesFromContent(formData.content) : getDatesFromContent(noteContent),
+            dates: formData.content ? getDatesFromContent(formData.content) : getDatesFromContent(noteContent)
         }
         dispatch(noteActions.updateNote(noteIdForUpdate, note))
         dispatch(formModesActions.toggleEditMode())
