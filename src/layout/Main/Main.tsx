@@ -1,7 +1,5 @@
 import '../commonStyles.css'
 import ActionButton from '../../components/ActionButton/ActionButton'
-import archiveLogo from '../../assets/images/archive-logo.svg'
-import plusLogo from '../../assets/images/plus-logo.svg'
 import Table from '../../components/Table/Table'
 import {getNotes} from '../../redux/selectors'
 import {useDispatch, useSelector} from 'react-redux'
@@ -12,6 +10,7 @@ import {Dispatch} from 'redux'
 import {actions} from '../../redux/notesReducer'
 import styles from './Main.module.css'
 import {tableTypes} from '../../enums/tableTypes'
+import {logos} from '../../imageHelpers'
 
 const Main: FC = () => {
 
@@ -92,7 +91,7 @@ const Main: FC = () => {
     return (
         <main>
             <div className="container">
-                <ActionButton imgSrc={archiveLogo} buttonText={showArchivedNotesButtonText}
+                <ActionButton imgSrc={logos.archiveLogo} buttonText={showArchivedNotesButtonText}
                               onClickCB={showArchivedNotes}/>
                 <section>
                     <Table notes={activeNotes} showEditForm={toggleEditMode} tableType={tableTypes.Notes}/>
@@ -104,7 +103,8 @@ const Main: FC = () => {
                                     change {editFormTitle} ?</h3>
                                 <CreateNoteForm onCloseForm={toggleEditMode} onSubmit={onUpdateNote}/>
                             </div> :
-                            <ActionButton imgSrc={plusLogo} buttonText='Create note' onClickCB={toggleCreateMode}/>
+                            <ActionButton imgSrc={logos.plusLogo} buttonText='Create note'
+                                          onClickCB={toggleCreateMode}/>
                     }
                 </section>
                 <section>

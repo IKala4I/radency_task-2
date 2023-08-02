@@ -1,6 +1,5 @@
 import styles from '../Headers.module.css'
-import archiveTool from '../../../../assets/images/tools/archive-tool-white.svg'
-import trashTool from '../../../../assets/images/tools/trash-tool-white.svg'
+import {tools} from '../../../../imageHelpers'
 
 const TableNoteHeader = () => {
     return (
@@ -15,10 +14,10 @@ const TableNoteHeader = () => {
                  <span className={styles.toolImg}>
                 </span>
                 <span>
-                    <img className={styles.toolImg} src={archiveTool} alt="archive"/>
+                    <img className={styles.toolImg} src={tools.archiveToolWhite} alt="archive"/>
                 </span>
                 <span>
-                    <img className={styles.toolImg} src={trashTool} alt="bin"/>
+                    <img className={styles.toolImg} src={tools.trashToolWhite} alt="bin"/>
                 </span>
             </div>
         </div>

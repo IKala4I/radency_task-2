@@ -1,6 +1,6 @@
-import notesLogo from '../../assets/images/notes-logo.svg'
 import styles from './Header.module.css'
 import '../commonStyles.css'
+import {logos} from '../../imageHelpers'
 
 const Header = () => {
     return (
@@ -16,7 +16,7 @@ const Header = () => {
                         <span>Notifications</span>
                     </div>
                     <div className={styles.logoBlock}>
-                        <img className={styles.logo} src={notesLogo} alt="notes-logo"/>
+                        <img className={styles.logo} src={logos.notesLogo} alt="notes-logo"/>
                         <h2>Notes</h2>
                     </div>
                 </div>
