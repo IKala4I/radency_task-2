@@ -142,12 +142,30 @@ const notesReducer = (state = initialState, action: ActionsType): InitialStateTy
     }
 }
 export const noteActions = {
-    createNote: (note: NoteType) => ({type: CREATE_NOTE, note} as const),
+    createNote: (note: NoteTypeForCreateNote) => ({type: CREATE_NOTE, note} as const),
     archiveNote: (noteId: number) => ({type: ARCHIVE_NOTE, noteId} as const),
     unarchiveNote: (noteId: number) => ({type: UNARCHIVE_NOTE, noteId} as const),
     removeNote: (noteId: number) => ({type: REMOVE_NOTE, noteId} as const),
-    updateNote: (noteId: number, data: any) => ({type: UPDATE_NOTE, payload: {noteId, data}} as const),
-    changeNoteIdForUpdate: (noteId: (number | null)) => ({type: CHANGE_NOTE_ID_FOR_UPDATE, noteId} as const)
+    updateNote: (noteId: number, data: DataForUpdateNoteType) => ({
+        type: UPDATE_NOTE,
+        payload: {noteId, data}
+    } as const),
+    changeNoteIdForUpdate: (noteId: number) => ({type: CHANGE_NOTE_ID_FOR_UPDATE, noteId} as const)
+}
+
+type NoteTypeForCreateNote = {
+    name: string,
+    created: string,
+    category: noteCategories,
+    content: string,
+    dates: string
+}
+
+type DataForUpdateNoteType = {
+    name: string,
+    content: string,
+    category: noteCategories,
+    dates: string
 }
 const updateObjectInArray = (
     items: NoteType[],

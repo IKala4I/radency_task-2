@@ -4,12 +4,12 @@ import Table from '../../components/Table/Table'
 import {getIsCreateMode, getIsEditMode, getNoteIdForUpdate} from '../../redux/selectors'
 import {useDispatch, useSelector} from 'react-redux'
 import {FC, useState} from 'react'
-import CreateNoteForm from '../../components/Forms/CreateNoteForm/CreateNoteForm'
 import {tableTypes} from '../../enums/tableTypes'
 import {logos} from '../../imageHelpers'
-import EditNoteForm from '../../components/Forms/EditNoteForm/EditNoteForm'
 import {formModesActions} from '../../redux/formModesReducer'
 import {Dispatch} from 'redux'
+import EditNoteBlock from '../../components/Forms/EditNoteBlock/EditNoteBlock'
+import CreateNoteBlock from '../../components/Forms/CreateNoteBlock/CreateNoteBlock'
 
 const Main: FC = () => {
 
@@ -22,13 +22,13 @@ const Main: FC = () => {
     const [isShowedArchivedNotes, setIsShowedArchivedNotes] = useState(false)
     const [showArchivedNotesButtonText, setShowArchivedNotesButtonText] = useState('Show archived notes')
 
-    const showArchivedNotes = () => {
+    const showArchivedNotes = (): void => {
         setIsShowedArchivedNotes(!isShowedArchivedNotes)
         const buttonText = !isShowedArchivedNotes ? 'Hide archived notes' : 'Show archived notes'
         setShowArchivedNotesButtonText(buttonText)
     }
 
-    const toggleCreateMode = () => {
+    const toggleCreateMode = (): void => {
         if (!isCreateMode && isEditMode)
             dispatch(formModesActions.toggleEditMode())
         dispatch(formModesActions.toggleCreateMode())
@@ -40,17 +40,21 @@ const Main: FC = () => {
                 <ActionButton imgSrc={logos.archiveLogo} buttonText={showArchivedNotesButtonText}
                               onClickCB={showArchivedNotes}/>
                 <section>
-                    <Table tableType={tableTypes.ActiveNotes} isCreateMode={isCreateMode} isEditMode={isEditMode} noteIdForUpdate={noteIdForUpdate}/>
-                    {isCreateMode ? <CreateNoteForm onCloseForm={toggleCreateMode}/> :
+                    <Table tableType={tableTypes.ActiveNotes} isCreateMode={isCreateMode} isEditMode={isEditMode}
+                           noteIdForUpdate={noteIdForUpdate}/>
+                    {isCreateMode ? <CreateNoteBlock onCloseForm={toggleCreateMode}/> :
                         <ActionButton imgSrc={logos.plusLogo} buttonText='Create note'
                                       onClickCB={toggleCreateMode}/>}
-                    {isEditMode ? <EditNoteForm noteIdForUpdate={noteIdForUpdate}/> : ''}
+                    {isEditMode ? <EditNoteBlock noteIdForUpdate={noteIdForUpdate as number}/> : ''}
                 </section>
                 <section>
-                    {isShowedArchivedNotes ? <Table tableType={tableTypes.ArchivedNotes} isCreateMode={isCreateMode} isEditMode={isEditMode} noteIdForUpdate={noteIdForUpdate}/> : ''}
+                    {isShowedArchivedNotes ?
+                        <Table tableType={tableTypes.ArchivedNotes} isCreateMode={isCreateMode} isEditMode={isEditMode}
+                               noteIdForUpdate={noteIdForUpdate}/> : ''}
                 </section>
                 <section>
-                    <Table tableType={tableTypes.Summary} isCreateMode={isCreateMode} isEditMode={isEditMode} noteIdForUpdate={noteIdForUpdate}/>
+                    <Table tableType={tableTypes.Summary} isCreateMode={isCreateMode} isEditMode={isEditMode}
+                           noteIdForUpdate={noteIdForUpdate}/>
                 </section>
             </div>
         </main>

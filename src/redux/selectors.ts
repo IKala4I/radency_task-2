@@ -1,5 +1,6 @@
 import {AppStateType} from './store'
 import {NoteType} from './notesReducer'
+import {noteCategories} from '../enums/noteCategories'
 
 export const getNotes = (state: AppStateType): NoteType[] => {
     return state.notes.notes
@@ -20,4 +21,8 @@ export const getNameNoteForUpdate = (noteId: number) => (state: AppStateType): s
 export const getContentNoteForUpdate = (noteId: number) => (state: AppStateType): string => {
     const notes = getNotes(state)
     return notes[noteId].content
+}
+export const getCategoryNoteForUpdate = (noteId: number) => (state: AppStateType): noteCategories => {
+    const notes = getNotes(state)
+    return notes[noteId].category
 }

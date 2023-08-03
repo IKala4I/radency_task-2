@@ -40,6 +40,7 @@ export const Select: FC<SelectProps> = (props) => {
     return (
         <FormControl {...props}>
             <select className={styles.field} {...input} {...restProps}>
+                <option value="" disabled selected>Select your option</option>
                 {options?.map((option) => (
                     <option value={option.value}>
                         {option.label}
