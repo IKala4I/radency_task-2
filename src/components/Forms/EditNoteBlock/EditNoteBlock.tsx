@@ -6,6 +6,7 @@ import {noteActions} from '../../../redux/notesReducer'
 import EditNoteReduxForm from './EditNoteForm/EditNoteForm'
 import {FC} from 'react'
 import {noteCategories} from '../../../enums/noteCategories'
+import {getDatesFromContent} from '../../../utils/getDatesFromContent'
 
 type EditNoteBlockProps = {
     noteIdForUpdate: number
@@ -41,11 +42,6 @@ const EditNoteBlock: FC<EditNoteBlockProps> = ({noteIdForUpdate}) => {
                                noteData={{noteName, noteContent}}/>
         </>
     )
-}
-
-const getDatesFromContent = (content: string) => {
-    const dateRegex = /\d{1,2}\/\d{1,2}\/\d{4}/g
-    return content.match(dateRegex)?.join(', ') || ''
 }
 
 export type EditFormDataType = {

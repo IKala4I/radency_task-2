@@ -5,6 +5,8 @@ import {formModesActions} from '../../../redux/formModesReducer'
 import CreateNoteReduxForm from './CreateNoteForm/CreateNoteForm'
 import {FC} from 'react'
 import {noteCategories} from '../../../enums/noteCategories'
+import {getDatesFromContent} from '../../../utils/getDatesFromContent'
+import {createTodayDate} from '../../../utils/createTodayDate'
 
 type CreateNoteBlockProps = {
     onCloseForm: () => void
@@ -37,23 +39,5 @@ export type CreateFormDataType = {
     category: noteCategories,
     content?: string
 }
-const getDatesFromContent = (content: string) => {
-    const dateRegex = /\d{1,2}\/\d{1,2}\/\d{4}/g
-    return content.match(dateRegex)?.join(', ') || ''
-}
 
-const createTodayDate = () => {
-    const today = new Date()
-
-    const months = [
-        "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ]
-
-    const month = months[today.getMonth()] // Отримуємо назву місяця з масиву
-    const day = today.getDate() // Отримуємо число місяця
-    const year = today.getFullYear() // Отримуємо рік
-
-    return `${month} ${day}, ${year}`
-}
 export default CreateNoteBlock
