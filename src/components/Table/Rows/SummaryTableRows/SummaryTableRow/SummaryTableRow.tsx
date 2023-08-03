@@ -1,13 +1,14 @@
 import {noteCategories} from '../../../../../enums/noteCategories'
 import styles from '../../Rows.module.css'
 import {icons} from '../../../../../imageHelpers'
+import {FC} from 'react'
 
 type SummaryTableRowPropsType = {
     category: noteCategories,
     activeNotesCount: Number,
     archivedNotesCount: Number
 }
-const SummaryTableRow = ({category, activeNotesCount, archivedNotesCount}: SummaryTableRowPropsType) => {
+const SummaryTableRow: FC<SummaryTableRowPropsType> = ({category, activeNotesCount, archivedNotesCount}) => {
     return (
         <div className={`${styles.tableRow} ${styles.summaryTableRow}`}>
             <div className={styles.iconBlock}>

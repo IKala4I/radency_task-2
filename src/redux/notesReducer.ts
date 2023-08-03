@@ -1,6 +1,6 @@
 import {noteCategories} from '../enums/noteCategories'
 import {InferActionsTypes} from './store'
-import {NotesArray} from '../Types/types'
+import {NotesArray, NoteType} from '../Types/types'
 
 const CREATE_NOTE = 'notes/CREATE_NOTE'
 const ARCHIVE_NOTE = 'notes/ARCHIVE_NOTE'
@@ -8,16 +8,6 @@ const UNARCHIVE_NOTE = 'notes/UNARCHIVE_NOTE'
 const REMOVE_NOTE = 'notes/REMOVE_NOTE'
 const UPDATE_NOTE = 'notes/UPDATE_NOTE'
 const CHANGE_NOTE_ID_FOR_UPDATE = 'notes/CHANGE_NOTE_ID_FOR_UPDATE'
-
-export type NoteType = {
-    id: number,
-    name: string,
-    created: string,
-    category: noteCategories,
-    content: string,
-    dates: string,
-    archived: boolean
-}
 
 
 const initialState = {

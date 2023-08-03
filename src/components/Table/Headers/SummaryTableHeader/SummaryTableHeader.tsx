@@ -1,6 +1,7 @@
 import styles from '../Headers.module.css'
+import {FC} from 'react'
 
-const SummaryTableHeader = () => {
+const SummaryTableHeader: FC = () => {
     return (
         <div className={`${styles.tableHeader} ${styles.summaryTableHeader}`}>
             <div></div>

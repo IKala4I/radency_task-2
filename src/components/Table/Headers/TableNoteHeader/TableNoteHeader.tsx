@@ -1,7 +1,8 @@
 import styles from '../Headers.module.css'
 import {tools} from '../../../../imageHelpers'
+import {FC} from 'react'
 
-const TableNoteHeader = () => {
+const TableNoteHeader:FC = () => {
     return (
         <div className={`${styles.tableHeader} ${styles.tableNoteHeader}`}>
             <div></div>

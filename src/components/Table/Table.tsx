@@ -6,10 +6,19 @@ import SummaryTableHeader from './Headers/SummaryTableHeader/SummaryTableHeader'
 import SummaryTableRows from './Rows/SummaryTableRows/SummaryTableRows'
 import {useSelector} from 'react-redux'
 import {getNotes} from '../../redux/selectors'
+import {FC} from 'react'
+import {NoteType} from '../../Types/types'
 
-const Table = (props: any) => {
-    const {tableType, ...restProps} = props
-    const notes = useSelector(getNotes)
+
+type TableProps = {
+    tableType: tableTypes
+    isCreateMode: boolean
+    isEditMode: boolean
+    noteIdForUpdate: number
+}
+
+const Table: FC<TableProps> = ({tableType, ...restProps}) => {
+    const notes: NoteType[] = useSelector(getNotes)
 
     const archivedNotes = notes.filter(note => note.archived)
     const activeNotes = notes.filter(note => !note.archived)

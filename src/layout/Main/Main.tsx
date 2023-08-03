@@ -41,7 +41,7 @@ const Main: FC = () => {
                               onClickCB={showArchivedNotes}/>
                 <section>
                     <Table tableType={tableTypes.ActiveNotes} isCreateMode={isCreateMode} isEditMode={isEditMode}
-                           noteIdForUpdate={noteIdForUpdate}/>
+                           noteIdForUpdate={noteIdForUpdate as number}/>
                     {isCreateMode ? <CreateNoteBlock onCloseForm={toggleCreateMode}/> :
                         <ActionButton imgSrc={logos.plusLogo} buttonText='Create note'
                                       onClickCB={toggleCreateMode}/>}
@@ -50,11 +50,11 @@ const Main: FC = () => {
                 <section>
                     {isShowedArchivedNotes ?
                         <Table tableType={tableTypes.ArchivedNotes} isCreateMode={isCreateMode} isEditMode={isEditMode}
-                               noteIdForUpdate={noteIdForUpdate}/> : ''}
+                               noteIdForUpdate={noteIdForUpdate as number}/> : ''}
                 </section>
                 <section>
                     <Table tableType={tableTypes.Summary} isCreateMode={isCreateMode} isEditMode={isEditMode}
-                           noteIdForUpdate={noteIdForUpdate}/>
+                           noteIdForUpdate={noteIdForUpdate as number}/>
                 </section>
             </div>
         </main>

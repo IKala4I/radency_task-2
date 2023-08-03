@@ -1,13 +1,15 @@
-import {NoteType} from '../../../../../redux/notesReducer'
 import styles from '../../Rows.module.css'
 import {icons, tools} from '../../../../../imageHelpers'
+import {FC} from 'react'
+import {NoteType} from '../../../../../Types/types'
 
-const TableNoteRow = ({note, archiveUnarchiveCB, removeNoteCB, showEditFormCB}: {
-    note: NoteType,
-    archiveUnarchiveCB: any,
-    removeNoteCB: any,
-    showEditFormCB: any
-}) => {
+type TableNoteRowProps = {
+    note: NoteType
+    archiveUnarchiveCB: (noteId: number) => void
+    removeNoteCB: (noteId: number) => void
+    showEditFormCB: (noteId: number) => void
+}
+const TableNoteRow: FC<TableNoteRowProps> = ({note, archiveUnarchiveCB, removeNoteCB, showEditFormCB}) => {
     return (
         <div className={`${styles.tableRow} ${styles.tableNoteRow}`}>
             <div className={styles.iconBlock}>
