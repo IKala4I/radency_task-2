@@ -16,13 +16,13 @@ export const getIsEditMode = (state: AppStateType): boolean => {
 }
 export const getNameNoteForUpdate = (noteId: number) => (state: AppStateType): string => {
     const notes = getNotes(state)
-    return notes[noteId].name
+    return notes.find(note => note.id === noteId)?.name || ''
 }
 export const getContentNoteForUpdate = (noteId: number) => (state: AppStateType): string => {
     const notes = getNotes(state)
-    return notes[noteId].content
+    return notes.find(note => note.id === noteId)?.content || ''
 }
 export const getCategoryNoteForUpdate = (noteId: number) => (state: AppStateType): noteCategories => {
     const notes = getNotes(state)
-    return notes[noteId].category
+    return notes.find(note => note.id === noteId)?.category || noteCategories.Task
 }

@@ -20,12 +20,16 @@ const TableNoteRows = ({notes, ...props}: any) => {
     }
 
     const archiveNote = (noteId: number) => {
+        if (noteId === noteIdForUpdate && isEditMode)
+            dispatch(formModesActions.toggleEditMode())
         dispatch(noteActions.archiveNote(noteId))
     }
     const unarchiveNote = (noteId: number) => {
         dispatch(noteActions.unarchiveNote(noteId))
     }
     const removeNote = (noteId: number) => {
+        if (noteId === noteIdForUpdate && isEditMode)
+            dispatch(formModesActions.toggleEditMode())
         dispatch(noteActions.removeNote(noteId))
     }
 
